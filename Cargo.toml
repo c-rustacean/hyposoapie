@@ -1,5 +1,5 @@
 [package]
-name = "yahoo-pipes-worse"
+name = "hyposoapie"
 version = "0.1.0"
 authors = ["Eddy Petrișor <eddy.petrisor@gmail.com>"]
 edition = "2018"

@@ -1,0 +1,9 @@
+[sources]
+hotnews = "https://feeds.feedburner.com/hotnews/yvoq"
+
+[filter.usr]
+in = [ "hotnews" ]
+contains = "USR"
+
+[output]
+combine = ["usr"]

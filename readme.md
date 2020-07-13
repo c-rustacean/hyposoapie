@@ -11,7 +11,9 @@ Replicate Yahoo! Pipes idea in command line and generate static pages.
 ## Minimal PoC
 
 * local rss (2-3 of them) (in file):
-  * rss crate: https://crates.io/crates/rss
+  * rss crate:
+    * https://crates.io/crates/rss (not updated since Jan 2020, no support for Atom)
+    * https://crates.io/crates/feed-rs
   * find-rss(?): https://crates.io/crates/find-rss
         * not maintained? alternatives?
 * filter defined via some config file (toml), just a "contains keyword" initially
@@ -42,10 +44,19 @@ contains = "electric car"
 in = [ "rss1" ]
 contains = [ "tesla" ]
 
-#[filter.unique]
-#in = [ "electric", "tesla" ]
-#mix = "dedup"
-## mix = "and"
+[output]
+combine = ["tesla", "electric"]
+```
+
+### TODO
+
+Support these (or something like it), also:
+
+```toml
+[filter.unique]
+in = [ "electric", "tesla" ]
+mix = "dedup"
+# mix = "and"
 
 [output]
 combine = "unique"

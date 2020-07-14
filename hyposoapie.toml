@@ -1,5 +1,6 @@
 [sources]
 hotnews = "https://feeds.feedburner.com/hotnews/yvoq"
+orf_at = "https://rss.orf.at/news.xml"
 
 [filter.usr]
 in = [ "hotnews" ]

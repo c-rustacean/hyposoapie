@@ -50,7 +50,7 @@ fn main() {
             .iter()
             .map(|(name, v)| RssSource {
                 name: SourceName { name: name.clone() },
-                url: v.to_string(),
+                url: v.to_string().replace("\"", ""),
             })
             .collect(),
         _ => panic!("No sources found in config"),

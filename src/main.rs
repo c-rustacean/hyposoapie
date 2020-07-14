@@ -21,7 +21,7 @@ enum FilterType {
 #[derive(Debug)]
 struct RssFilter {
     name: String,
-    input: SourceName,
+    input: Vec<SourceName>,
     filter: FilterType,
 }
 
@@ -53,7 +53,45 @@ fn main() {
             .collect(),
         _ => panic!("No sources found in config"),
     };
-    let filters = toml.get("filters");
+
+    let filters = match toml.get("filter").expect("No filters found in config") {
+        Value::Table(filters_map) => filters_map
+            .into_iter()
+            .map(|(name, v)| {
+                let filter_table = v.as_table()
+                    .unwrap_or_else(|| panic!(
+                    "Expected to be able to get the Table for filter {}",
+                    &name
+                ));
+
+                let input = filter_table
+                    .get("in")
+                    .unwrap_or_else(|| panic!("No 'in' feed specified for filter {}", &name))
+                    .as_array()
+                    .expect("Could not unwrap the array of input rss-es")
+                    .iter()
+                    .map(|v| SourceName {
+                        name: v.as_str().unwrap().to_string(),
+                    })
+                    .collect::<Vec<_>>();
+
+                let filter = FilterType::Contains(
+                    dbg!(filter_table.get("contains"))
+                        .expect("No 'contains' field in config")
+                        .as_str()
+                        .unwrap()
+                        .to_string(),
+                );
+
+                RssFilter {
+                    name: name.to_string(),
+                    input,
+                    filter,
+                }
+            })
+            .collect::<Vec<_>>(),
+        _ => panic!("Filter table contains errors!"),
+    };
     let output = toml.get("output");
 
     println!("Sources: {:#?}", sources);

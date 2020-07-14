@@ -1,3 +1,4 @@
+use std::collections::BTreeMap;
 use std::fs::File;
 use std::io::prelude::*;
 use toml::Value;
@@ -34,7 +35,7 @@ struct Config {
 
 const CONFIG: &str = "hyposoapie.toml";
 
-fn main() {
+fn get_config_as_string() -> String {
     let mut f =
         File::open(CONFIG).unwrap_or_else(|_| panic!("Could not open config file {:?}", CONFIG));
     let mut toml_string = String::new();
@@ -42,9 +43,11 @@ fn main() {
     f.read_to_string(&mut toml_string)
         .expect("Could not read to string the config file");
 
-    let toml: std::collections::BTreeMap<String, Value> = toml::from_str(&toml_string).unwrap();
+    toml_string
+}
 
-    let sources: Vec<RssSource> = match toml.get("sources").expect("No sources found in config") {
+fn get_sources(toml: &BTreeMap<String, Value>) -> Vec<RssSource> {
+    match toml.get("sources").expect("No sources found in config") {
         Value::Table(x) => x
             .iter()
             .map(|(name, v)| RssSource {
@@ -53,9 +56,11 @@ fn main() {
             })
             .collect(),
         _ => panic!("No sources found in config"),
-    };
+    }
+}
 
-    let filters = match toml.get("filter").expect("No filters found in config") {
+fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
+    match toml.get("filter").expect("No filters found in config") {
         Value::Table(filters_map) => filters_map
             .into_iter()
             .map(|(name, v)| {
@@ -91,9 +96,11 @@ fn main() {
             })
             .collect::<Vec<_>>(),
         _ => panic!("Filter table contains errors!"),
-    };
-    let output = toml
-        .get("output")
+    }
+}
+
+fn get_outputs(toml: &BTreeMap<String, Value>) -> Vec<SourceName> {
+    toml.get("output")
         .unwrap_or_else(|| panic!("Unable to find 'output' table in configuration"))
         .as_table()
         .unwrap()
@@ -102,10 +109,26 @@ fn main() {
         .as_array()
         .unwrap()
         .into_iter()
-        .map(|v| v.to_string().replace("\"", ""))
-        .collect::<Vec<_>>();
+        .map(|v| SourceName {
+            name: v.to_string().replace("\"", ""),
+        })
+        .collect::<Vec<_>>()
+}
 
-    println!("Sources: {:#?}", sources);
-    println!("Filters: {:#?}", filters);
-    println!("Output: {:#?}", output);
+fn parse_config() -> Config {
+    let toml: BTreeMap<String, Value> = toml::from_str(&get_config_as_string()).unwrap();
+
+    let sources = get_sources(&toml);
+    let filters = get_filters(&toml);
+    let output = get_outputs(&toml);
+
+    Config {
+        sources,
+        filters,
+        output,
+    }
+}
+
+fn main() {
+    let _config = parse_config();
 }

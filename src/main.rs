@@ -1,6 +1,6 @@
-use toml::Value;
 use std::fs::File;
 use std::io::prelude::*;
+use toml::Value;
 
 #[derive(Debug)]
 struct SourceName {
@@ -35,7 +35,8 @@ struct Config {
 const CONFIG: &str = "hyposoapie.toml";
 
 fn main() {
-    let mut f = File::open(CONFIG).unwrap_or_else(|_| panic!("Could not open config file {:?}", CONFIG));
+    let mut f =
+        File::open(CONFIG).unwrap_or_else(|_| panic!("Could not open config file {:?}", CONFIG));
     let mut toml_string = String::new();
 
     f.read_to_string(&mut toml_string)
@@ -58,11 +59,9 @@ fn main() {
         Value::Table(filters_map) => filters_map
             .into_iter()
             .map(|(name, v)| {
-                let filter_table = v.as_table()
-                    .unwrap_or_else(|| panic!(
-                    "Expected to be able to get the Table for filter {}",
-                    &name
-                ));
+                let filter_table = v.as_table().unwrap_or_else(|| {
+                    panic!("Expected to be able to get the Table for filter {}", &name)
+                });
 
                 let input = filter_table
                     .get("in")
@@ -76,7 +75,8 @@ fn main() {
                     .collect::<Vec<_>>();
 
                 let filter = FilterType::Contains(
-                    dbg!(filter_table.get("contains"))
+                    filter_table
+                        .get("contains")
                         .expect("No 'contains' field in config")
                         .as_str()
                         .unwrap()
@@ -92,7 +92,18 @@ fn main() {
             .collect::<Vec<_>>(),
         _ => panic!("Filter table contains errors!"),
     };
-    let output = toml.get("output");
+    let output = toml
+        .get("output")
+        .unwrap_or_else(|| panic!("Unable to find 'output' table in configuration"))
+        .as_table()
+        .unwrap()
+        .get("combine")
+        .unwrap()
+        .as_array()
+        .unwrap()
+        .into_iter()
+        .map(|v| v.to_string().replace("\"", ""))
+        .collect::<Vec<_>>();
 
     println!("Sources: {:#?}", sources);
     println!("Filters: {:#?}", filters);

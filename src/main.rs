@@ -1,6 +1,4 @@
-use serde_derive::Deserialize;
 use toml::Value;
-// use std::io;
 use std::fs::File;
 use std::io::prelude::*;
 
@@ -34,10 +32,10 @@ struct Config {
     output: Vec<SourceName>,
 }
 
-const CONFIG: &'static str = "hyposoapie.toml";
+const CONFIG: &str = "hyposoapie.toml";
 
 fn main() {
-    let mut f = File::open(CONFIG).expect(&format!("Could not open config file {:?}", CONFIG));
+    let mut f = File::open(CONFIG).unwrap_or_else(|_| panic!("Could not open config file {:?}", CONFIG));
     let mut toml_string = String::new();
 
     f.read_to_string(&mut toml_string)

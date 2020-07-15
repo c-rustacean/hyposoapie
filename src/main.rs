@@ -33,6 +33,29 @@ struct Config {
     output: Vec<SourceName>,
 }
 
+trait Name {
+    fn name(&self) -> &str;
+}
+
+macro_rules! name {
+    ($t:ty) => {
+        impl Name for $t {
+            fn name(&self) -> &str {
+                &(self.name)
+            }
+        }
+    };
+}
+
+name!(SourceName);
+name!(RssFilter);
+
+impl Name for RssSource {
+    fn name(&self) -> &str {
+        self.name.name()
+    }
+}
+
 const CONFIG: &str = "hyposoapie.toml";
 
 fn get_config_as_string() -> String {
@@ -145,5 +168,77 @@ fn parse_config() -> Config {
 }
 
 fn main() {
-    let _config = parse_config();
+    let config = parse_config();
+
+    // TODO: Create the chain of dependencies/processing from config
+    // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
+    //       the entire chain is iterating over the trait
+
+    let mut process_queue = config.output.iter().map(|x| x.name()).collect::<Vec<_>>();
+
+    use std::collections::HashSet;
+
+    let filter_names = config
+        .filters
+        .iter()
+        .map(|x| x.name())
+        .collect::<HashSet<_>>();
+
+    let feed_names = config
+        .sources
+        .iter()
+        .map(|x| x.name())
+        .collect::<HashSet<_>>();
+
+    let feeds_and_filters = feed_names
+        .iter()
+        .chain(filter_names.iter())
+        .collect::<HashSet<_>>();
+
+    // dbg!(&feed_names);
+    // dbg!(&filter_names);
+    // dbg!(&feeds_and_filters);
+
+    let mut to_process = process_queue.iter().map(|&x| x).collect::<HashSet<&str>>();
+
+    let (mut chain_extra, _) =
+        process_queue
+            .iter()
+            .fold((Vec::new(), to_process), |(mut chain, mut seen), x| {
+
+                match (feed_names.contains(x), filter_names.contains(x)) {
+                    (true, true) => panic!("Non-unique name for filter and feed \"{}\"", x),
+                    (true, _) => {
+                        seen.insert(*x);
+                        chain.push(*x);
+                        (chain, seen)
+                    }
+                    (_, true) => {
+                        let mut filter = config
+                            .filters
+                            .iter()
+                            .filter(|&f| *x == f.name())
+                            .next()
+                            .unwrap();
+                        let in_names = filter
+                            .input
+                            .iter()
+                            .map(|i| i.name())
+                            .filter(|&n| !seen.contains(&n))
+                            .collect::<Vec<_>>();
+                        for n in dbg!(in_names) {
+                            seen.insert(n);
+                            chain.push(n);
+                        }
+
+                        (chain, seen)
+                    }
+                    _ => panic!("Undefined filter or feed \"{}\"", x),
+                }
+            });
+
+    process_queue.append(dbg!(&mut chain_extra));
+    dbg!(process_queue);
+
+    // TODO: chained filters
 }

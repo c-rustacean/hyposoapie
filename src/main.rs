@@ -47,7 +47,7 @@ fn get_config_as_string() -> String {
 }
 
 fn get_sources(toml: &BTreeMap<String, Value>) -> Vec<RssSource> {
-    match toml.get("sources").expect("No sources found in config") {
+    let sources: Vec<_> = match toml.get("sources").expect("No sources found in config") {
         Value::Table(x) => x
             .iter()
             .map(|(name, v)| RssSource {
@@ -56,6 +56,12 @@ fn get_sources(toml: &BTreeMap<String, Value>) -> Vec<RssSource> {
             })
             .collect(),
         _ => panic!("No sources found in config"),
+    };
+
+    if sources.len() == 0 {
+        panic!("Sources section from config is empty")
+    } else {
+        sources
     }
 }
 
@@ -70,7 +76,7 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
 
                 let input = filter_table
                     .get("in")
-                    .unwrap_or_else(|| panic!("No 'in' feed specified for filter {}", &name))
+                    .unwrap_or_else(|| panic!("No \"in\" feed specified for filter \"{}\"", &name))
                     .as_array()
                     .expect("Could not unwrap the array of input rss-es")
                     .iter()
@@ -82,7 +88,9 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
                 let filter = FilterType::Contains(
                     filter_table
                         .get("contains")
-                        .expect("No 'contains' field in config")
+                        .unwrap_or_else(|| {
+                            panic!("No \"contains\" field in config for filter \"{}\"", &name)
+                        })
                         .as_str()
                         .unwrap()
                         .to_string(),
@@ -100,19 +108,26 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
 }
 
 fn get_outputs(toml: &BTreeMap<String, Value>) -> Vec<SourceName> {
-    toml.get("output")
+    let output_feeds = toml
+        .get("output")
         .unwrap_or_else(|| panic!("Unable to find 'output' table in configuration"))
         .as_table()
         .unwrap()
         .get("combine")
-        .unwrap()
+        .unwrap_or_else(|| panic!("No \"combine\" field found in config output section"))
         .as_array()
-        .unwrap()
+        .unwrap_or_else(|| panic!("Field \"combine\" in \"output\" section should be an array"))
         .into_iter()
         .map(|v| SourceName {
             name: v.to_string().replace("\"", ""),
         })
-        .collect::<Vec<_>>()
+        .collect::<Vec<_>>();
+
+    if output_feeds.len() == 0 {
+        panic!("No feeds in output config would generate an empty page")
+    } else {
+        output_feeds
+    }
 }
 
 fn parse_config() -> Config {

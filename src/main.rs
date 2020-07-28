@@ -1,6 +1,7 @@
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::File;
 use std::io::prelude::*;
+use std::rc::Rc;
 use toml::Value;
 
 #[derive(Debug, Clone)]
@@ -192,6 +193,26 @@ impl Config {
         self.sources.iter().any(|x| x.name() == name)
     }
 }
+
+struct QueueElement {
+    name: String,
+    next: Option<Rc<QueueElement>>,
+}
+
+impl QueueElement {
+    fn new(name: String, next: &Option<Rc<QueueElement>>) -> Self {
+        if let Some(rc_qe) = next {
+            let rc_qe = rc_qe.clone();
+            QueueElement {
+                name,
+                next: Some(rc_qe),
+            }
+        } else {
+            QueueElement { name, next: None }
+        }
+    }
+}
+
 fn main() {
     let config = parse_config();
 
@@ -199,10 +220,17 @@ fn main() {
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
+    let queue_head: Option<QueueElement> = None;
     let mut to_process: HashMap<String, Option<Vec<String>>> = HashMap::new();
+    let mut _seen_filters: HashSet<String> = HashSet::new();
+    let mut prev_qe = None;
 
     for s in config.output.iter().map(|i| i.name().to_string()) {
-        to_process.insert(s, None);
+        let qe = QueueElement::new(s, &prev_qe);
+
+        // TODO: check name is unseen
+        // TODO: Add in HashSet the name,
+        // TODO: link the qe in the list
     }
 
     println!("Config: {:#?}", config);

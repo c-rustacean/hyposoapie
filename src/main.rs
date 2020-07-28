@@ -1,25 +1,25 @@
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, HashMap};
 use std::fs::File;
 use std::io::prelude::*;
 use toml::Value;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct SourceName {
     name: String,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct RssSource {
     name: SourceName,
     url: String,
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 enum FilterType {
     Contains(String),
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct RssFilter {
     name: String,
     input: Vec<SourceName>,
@@ -31,6 +31,45 @@ struct Config {
     sources: Vec<RssSource>,
     filters: Vec<RssFilter>,
     output: Vec<SourceName>,
+}
+
+trait Inputs {
+    fn inputs(&self) -> Vec<String>;
+}
+
+impl Inputs for RssFilter {
+    fn inputs(&self) -> Vec<String> {
+        self.input.iter().map(|i| i.name().to_owned()).collect()
+    }
+}
+
+impl Inputs for RssSource {
+    fn inputs(&self) -> Vec<String> {
+        vec![self.url.clone()]
+    }
+}
+
+trait Name {
+    fn name(&self) -> &str;
+}
+
+macro_rules! name {
+    ($t:ty) => {
+        impl Name for $t {
+            fn name(&self) -> &str {
+                &(self.name)
+            }
+        }
+    };
+}
+
+name!(SourceName);
+name!(RssFilter);
+
+impl Name for RssSource {
+    fn name(&self) -> &str {
+        self.name.name()
+    }
 }
 
 const CONFIG: &str = "hyposoapie.toml";
@@ -144,6 +183,28 @@ fn parse_config() -> Config {
     }
 }
 
+impl Config {
+    fn is_filter(&self, name: &str) -> bool {
+        self.filters.iter().any(|x| x.name() == name)
+    }
+
+    fn is_source(&self, name: &str) -> bool {
+        self.sources.iter().any(|x| x.name() == name)
+    }
+}
 fn main() {
-    let _config = parse_config();
+    let config = parse_config();
+
+    // TODO: Create the chain of dependencies/processing from config
+    // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
+    //       the entire chain is iterating over the trait
+
+    let mut to_process: HashMap<String, Option<Vec<String>>> = HashMap::new();
+
+    for s in config.output.iter().map(|i| i.name().to_string()) {
+        to_process.insert(s, None);
+    }
+
+    println!("Config: {:#?}", config);
+    println!("To do: {:#?}", to_process);
 }

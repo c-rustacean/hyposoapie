@@ -1,14 +1,16 @@
 [sources]
 hotnews = "https://feeds.feedburner.com/hotnews/yvoq"
-orf_at = "https://rss.orf.at/news.xml"
+# orf_at = "https://rss.orf.at/news.xml"
 
 [filter.usr]
 in = [ "hotnews" ]
 contains = "USR"
 
-[filter.barna]
-in = [ "hotnews" ]
-contains = "Barna"
+# [filter.barna]
+# in = [ "hotnews" ]
+# contains = "Barna"
 
 [output]
-combine = ["usr", "barna"]
+combine = [ "usr" ]
+
+# "usr" "barna" "hotnews"

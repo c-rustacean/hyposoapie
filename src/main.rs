@@ -220,13 +220,19 @@ fn main() {
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
-    let queue_head: Option<QueueElement> = None;
+    let mut queue_head: Option<Rc<QueueElement>> = None;
     let mut to_process: HashMap<String, Option<Vec<String>>> = HashMap::new();
     let mut _seen_filters: HashSet<String> = HashSet::new();
     let mut prev_qe = None;
 
     for s in config.output.iter().map(|i| i.name().to_string()) {
         let qe = QueueElement::new(s, &prev_qe);
+        let rc_qe = Rc::new(qe);
+        if queue_head.is_none() {
+            queue_head = Some(rc_qe.clone());
+        }
+        prev_qe = Some(rc_qe);
+
 
         // TODO: check name is unseen
         // TODO: Add in HashSet the name,

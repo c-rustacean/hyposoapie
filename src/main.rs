@@ -1,3 +1,4 @@
+use std::cell::RefCell;
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::fs::File;
 use std::io::prelude::*;
@@ -194,22 +195,57 @@ impl Config {
     }
 }
 
+type QuElem = Option<Rc<QueueElement>>;
+
+#[derive(Debug, Clone, PartialEq)]
 struct QueueElement {
     name: String,
-    next: Option<Rc<QueueElement>>,
+    next: RefCell<QuElem>,
 }
 
 impl QueueElement {
-    fn new(name: String, next: &Option<Rc<QueueElement>>) -> Self {
-        if let Some(rc_qe) = next {
-            let rc_qe = rc_qe.clone();
-            QueueElement {
-                name,
-                next: Some(rc_qe),
-            }
-        } else {
-            QueueElement { name, next: None }
+    fn new(name: String, next: &QuElem) -> Self {
+        QueueElement {
+            name,
+            next: RefCell::new(if let Some(rc_qe) = next.clone() {
+                let rc_qe = rc_qe.clone();
+                Some(rc_qe)
+            } else {
+                None
+            }),
         }
+    }
+
+    fn set_next(&self, next: &QuElem) {
+        let link = next.clone();
+        *self.next.borrow_mut() = link.clone();
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_queue_new_link() {
+        let foo = Rc::new(QueueElement::new("foo".to_string(), &None));
+        let bar = QueueElement::new("bar".to_owned(), &Some(foo.clone()));
+
+        assert_eq!(&bar.next.borrow().as_ref().unwrap().as_ref(), &foo.as_ref());
+
+        eprintln!("bar = {:#?}", bar);
+    }
+
+    #[test]
+    fn test_queue_set_link() {
+        let foo = Rc::new(QueueElement::new("foo".to_string(), &None));
+        let bar = QueueElement::new("bar".to_owned(), &None);
+
+        bar.set_next(&Some(foo.clone()));
+
+        assert_eq!(&bar.next.borrow().as_ref().unwrap().as_ref(), &foo.as_ref());
+
+        eprintln!("bar = {:#?}", bar);
     }
 }
 
@@ -220,19 +256,36 @@ fn main() {
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
-    let mut queue_head: Option<Rc<QueueElement>> = None;
-    let mut to_process: HashMap<String, Option<Vec<String>>> = HashMap::new();
-    let mut _seen_filters: HashSet<String> = HashSet::new();
-    let mut prev_qe = None;
+    let mut queue_head: QuElem = None;
+    // let mut to_process: HashMap<String, Option<Vec<String>>> = HashMap::new();
+    let mut seen_filters: HashSet<String> = HashSet::new();
+    let mut opt_prev_qe: Option<Rc<QueueElement>> = None;
 
     for s in config.output.iter().map(|i| i.name().to_string()) {
-        let qe = QueueElement::new(s, &prev_qe);
-        let rc_qe = Rc::new(qe);
-        if queue_head.is_none() {
-            queue_head = Some(rc_qe.clone());
-        }
-        prev_qe = Some(rc_qe);
+        eprintln!(
+            "s = {}\n\tqueue_head ??? = {:#?}\n\topt_prev_qe = {:#?}",
+            &s,
+            // &queue_head.unwrap() as const ptr*,
+            &queue_head,
+            // &opt_prev_qe.unwrap().as_ptr(),
+            &opt_prev_qe
+        );
 
+        if !seen_filters.contains(&s) {
+            seen_filters.insert(s.clone());
+
+            let rc_qe = Rc::new(QueueElement::new(s, &None));
+
+            if queue_head.is_none() {
+                queue_head = Some(rc_qe.clone());
+            }
+
+            let opt_this_qe = Some(rc_qe.clone());
+            if let Some(prev_qe) = opt_prev_qe {
+                prev_qe.set_next(&opt_this_qe);
+            }
+            opt_prev_qe = opt_this_qe;
+        }
 
         // TODO: check name is unseen
         // TODO: Add in HashSet the name,
@@ -240,5 +293,6 @@ fn main() {
     }
 
     println!("Config: {:#?}", config);
-    println!("To do: {:#?}", to_process);
+    // println!("To do: {:#?}", to_process);
+    println!("Queue: {:#?}", queue_head);
 }

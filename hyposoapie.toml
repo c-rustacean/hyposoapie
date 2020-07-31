@@ -6,11 +6,11 @@ hotnews = "https://feeds.feedburner.com/hotnews/yvoq"
 in = [ "hotnews" ]
 contains = "USR"
 
-# [filter.barna]
-# in = [ "hotnews" ]
-# contains = "Barna"
+[filter.barna]
+in = [ "hotnews" ]
+contains = "Barna"
 
 [output]
-combine = [ "usr" ]
+combine = [ "usr", "barna", "usr" ]
 
 # "usr" "barna" "hotnews"

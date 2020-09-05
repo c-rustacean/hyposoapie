@@ -3,7 +3,7 @@ use std::fs::File;
 use std::io::prelude::*;
 use toml::Value;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 struct SourceName {
     name: String,
 }
@@ -195,50 +195,59 @@ fn main() {
         .chain(filter_names.iter())
         .collect::<HashSet<_>>();
 
+    if feeds_and_filters.len() < feed_names.len() + filter_names.len() {
+        panic!("Duplicate name used for both feed and filter is not supported");
+    }
+
     // dbg!(&feed_names);
     // dbg!(&filter_names);
     // dbg!(&feeds_and_filters);
 
-    let mut to_process = process_queue.iter().map(|&x| x).collect::<HashSet<&str>>();
+    let mut seen: HashSet<&str> = HashSet::new();
+    let mut queue_extension: Vec<&str>;
 
-    let (mut chain_extra, _) =
-        process_queue
-            .iter()
-            .fold((Vec::new(), to_process), |(mut chain, mut seen), x| {
+    let mut next_index = 0usize;
 
-                match (feed_names.contains(x), filter_names.contains(x)) {
-                    (true, true) => panic!("Non-unique name for filter and feed \"{}\"", x),
-                    (true, _) => {
-                        seen.insert(*x);
-                        chain.push(*x);
-                        (chain, seen)
-                    }
-                    (_, true) => {
-                        let mut filter = config
-                            .filters
-                            .iter()
-                            .filter(|&f| *x == f.name())
-                            .next()
-                            .unwrap();
-                        let in_names = filter
-                            .input
-                            .iter()
-                            .map(|i| i.name())
-                            .filter(|&n| !seen.contains(&n))
-                            .collect::<Vec<_>>();
-                        for n in dbg!(in_names) {
-                            seen.insert(n);
-                            chain.push(n);
-                        }
+    loop {
+        queue_extension = Vec::new();
 
-                        (chain, seen)
-                    }
-                    _ => panic!("Undefined filter or feed \"{}\"", x),
-                }
-            });
+        for &item in process_queue.iter().skip(next_index) {
 
-    process_queue.append(dbg!(&mut chain_extra));
-    dbg!(process_queue);
+            if seen.contains(&item) {
+                continue;
+            }
+
+            if filter_names.contains(&item) {
+                let mut unique_filter_inputs = config.filters
+                    .iter()
+                    .filter(|&x| x.name() == item)
+                    .map(|x| &x.input)
+                    .flatten()
+                    .map(|x| x.name())
+                    .filter(|&name| !seen.contains(&name))
+                    .collect::<Vec<_>>();
+
+                queue_extension.append(&mut unique_filter_inputs);
+            } else if feed_names.contains(&item) {
+                let mut unique_feed_inputs = config.sources
+                    .iter()
+                    .filter(|&x| x.name() == item)
+                    .map(|x| x.name())
+                    .filter(|&name| !seen.contains(&name))
+                    .collect::<Vec<_>>();
+
+                queue_extension.append(&mut unique_feed_inputs);
+            } else {
+                panic!("Found an unknown filter or feed name {}!", &item);
+            }
+
+            // TODO: check queue_extension contains only unique names before pushing into the queue
+
+            // we've dealt with the current item but queue_extension might have other items
+            assert!(seen.insert(&item));
+        }
+
+    }
 
     // TODO: chained filters
 }

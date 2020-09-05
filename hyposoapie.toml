@@ -13,4 +13,8 @@ contains = "Barna"
 [output]
 combine = ["barna"]
 
-# "usr" "barna" "hotnews"
+# expected:
+# ["barna"]
+# ["barna"], ["usr"]
+# ["barna". "usr"], ["hotnews"]
+# =======

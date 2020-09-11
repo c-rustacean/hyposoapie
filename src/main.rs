@@ -260,6 +260,14 @@ fn main() {
         }
     }
 
+    // later introduced items in the queue should be the resolvable ones
+    process_queue.reverse();
+
+    // TODO: Detect cycles in chains. How?
+    //       Maybe each of the outputs from config should
+    //       be processed independently, so we re-see an
+    //       item. we have a cycle?
+
     // TODO: chained filters
 
     dbg!(process_queue);

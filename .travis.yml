@@ -7,3 +7,6 @@ jobs:
   allow_failures:
     - rust: nightly
   fast_finish: true
+cache: cargo
+before_cache:
+  - rm -rf "$TRAVIS_HOME/.cargo/registry/src"

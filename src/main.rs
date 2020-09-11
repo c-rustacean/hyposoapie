@@ -241,13 +241,26 @@ fn main() {
                 panic!("Found an unknown filter or feed name {}!", &item);
             }
 
-            // TODO: check queue_extension contains only unique names before pushing into the queue
-
             // we've dealt with the current item but queue_extension might have other items
-            assert!(seen.insert(&item));
+            seen.insert(&item);
         }
 
+        next_index = process_queue.len();
+
+        if queue_extension.len() == 0 {
+            break;
+        } else {
+            // check we insert only unique names
+            let mut new_items = HashSet::from(seen.clone());
+            for new_item in queue_extension {
+                if new_items.insert(new_item) {
+                    process_queue.push(new_item);
+                }
+            }
+        }
     }
 
     // TODO: chained filters
+
+    dbg!(process_queue);
 }

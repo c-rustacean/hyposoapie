@@ -115,7 +115,10 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
                             panic!("No \"contains\" field in config for filter \"{}\"", &name)
                         })
                         .as_str()
-                        .unwrap()
+                        .unwrap_or_else(|| {
+                            panic!("\n\n    Could not turn to str in filter_table \"{}\".
+    Maybe the filed is not a single string, but array?\n\n", &name)
+                        })
                         .to_string(),
                 );
 

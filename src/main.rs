@@ -212,13 +212,13 @@ fn main() {
         queue_extension = Vec::new();
 
         for &item in process_queue.iter().skip(next_index) {
-
             if seen.contains(&item) {
                 continue;
             }
 
             if filter_names.contains(&item) {
-                let mut unique_filter_inputs = config.filters
+                let mut unique_filter_inputs = config
+                    .filters
                     .iter()
                     .filter(|&x| x.name() == item)
                     .map(|x| &x.input)
@@ -229,7 +229,8 @@ fn main() {
 
                 queue_extension.append(&mut unique_filter_inputs);
             } else if feed_names.contains(&item) {
-                let mut unique_feed_inputs = config.sources
+                let mut unique_feed_inputs = config
+                    .sources
                     .iter()
                     .filter(|&x| x.name() == item)
                     .map(|x| x.name())

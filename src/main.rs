@@ -108,6 +108,9 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
                     })
                     .collect::<Vec<_>>();
 
+                // TODO: Deal with filters with list of 'contains' words.
+                //       Semantic that makes sense is 'OR' as 'AND' can
+                //       be obtained via chaining filters
                 let filter = FilterType::Contains(
                     filter_table
                         .get("contains")
@@ -116,8 +119,11 @@ fn get_filters(toml: &BTreeMap<String, Value>) -> Vec<RssFilter> {
                         })
                         .as_str()
                         .unwrap_or_else(|| {
-                            panic!("\n\n    Could not turn to str in filter_table \"{}\".
-    Maybe the filed is not a single string, but array?\n\n", &name)
+                            panic!(
+                                "\n\n    Could not turn to str in filter_table \"{}\".
+    Maybe the filed is not a single string, but array?\n\n",
+                                &name
+                            )
                         })
                         .to_string(),
                 );

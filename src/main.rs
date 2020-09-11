@@ -239,7 +239,7 @@ fn main() {
 
                 queue_extension.append(&mut unique_feed_inputs);
             } else {
-                panic!("Found an unknown filter or feed name {}!", &item);
+                panic!("\n\n    Found an unknown filter or feed name: '{}'\n    Please check the configuration file!\n", &item);
             }
 
             // we've dealt with the current item but queue_extension might have other items

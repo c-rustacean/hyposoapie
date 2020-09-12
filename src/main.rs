@@ -192,15 +192,6 @@ fn parse_config() -> Config {
 fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     // Create the chain of dependencies/processing from config
 
-    // TODO: Detect cycles in chains. How?
-    //       Maybe each of the outputs from config should
-    //       be processed independently, so we re-see an
-    //       item. we have a cycle?
-
-    // TODO: Make sure that if filter1 depends on filter2, and both are
-    //       outputs, the order in the processing queue is reflecting the
-    //       dependency (filter2 before filter1)
-
     use std::collections::HashMap;
     use std::collections::HashSet;
 
@@ -324,4 +315,20 @@ fn main() {
     //       the entire chain is iterating over the trait
 
     let _process_queue = dbg!(compute_process_queue(&config));
+
+    // TODO: Detect cycles in chains. How?
+    //       Maybe each of the outputs from config should
+    //       be processed independently, so we re-see an
+    //       item. we have a cycle?
+
+    // TODO: Make sure that if filter1 depends on filter2, and both are
+    //       outputs, the order in the processing queue is reflecting the
+    //       dependency (filter2 before filter1)
+
+    // Solution (for both):
+    // 1. iterate through the process_queue and resolve items
+    // 2. if all items were processed, we're done
+    // 3. count the number of resolved items and compare to the
+    //    previous count (initially 0); if they are identical,
+    //    then we're stuck - we have a cycle; repeat otherwise
 }

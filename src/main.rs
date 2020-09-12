@@ -180,6 +180,7 @@ fn parse_config() -> Config {
 struct QueueItem<'cfg> {
     name: &'cfg str,
     item_type: QueueItemType,
+    is_output: bool,
 }
 
 #[derive(PartialEq, Copy, Clone, Debug)]
@@ -200,12 +201,12 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     //       outputs, the order in the processing queue is reflecting the
     //       dependency (filter2 before filter1)
 
-    use QueueItemType::*;
     use std::collections::HashMap;
+    use std::collections::HashSet;
 
     let mut process_queue = config.output.iter().map(|x| x.name()).collect::<Vec<_>>();
 
-    use std::collections::HashSet;
+    let outputs = process_queue.len();
 
     let filter_names = config
         .filters
@@ -242,6 +243,8 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
         queue_extension = Vec::new();
 
         for &item in process_queue.iter().skip(next_index) {
+            use QueueItemType::*;
+
             if seen.contains(&item) {
                 continue;
             }
@@ -257,13 +260,7 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
                     .filter(|&name| !seen.contains(&name))
                     .collect::<Vec<_>>();
 
-                match queue_types.insert(&item, Filter) {
-                    Some(Source) => panic!(
-                        "Duplicate name found ({}), but of different type",
-                        &item
-                    ),
-                    _ => (),
-                };
+                queue_types.insert(&item, Filter);
 
                 queue_extension.append(&mut unique_filter_inputs);
             } else if feed_names.contains(&item) {
@@ -275,13 +272,7 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
                     .filter(|&name| !seen.contains(&name))
                     .collect::<Vec<_>>();
 
-                match queue_types.insert(&item, Source) {
-                    Some(Filter) => panic!(
-                        "Duplicate name found ({}), but of different type",
-                        &item
-                    ),
-                    _ => (),
-                };
+                queue_types.insert(&item, Source);
 
                 queue_extension.append(&mut unique_feed_inputs);
             } else {
@@ -313,11 +304,17 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     assert_eq!(process_queue.len(), queue_types.len());
     dbg!(&process_queue);
 
-    process_queue.iter().map(|&name| QueueItem {
-        name,
-        item_type: queue_types.get(name).copied().unwrap(),
-    })
-    .collect()
+    let just_inputs = process_queue.len() - outputs;
+
+    process_queue
+        .iter()
+        .enumerate()
+        .map(|(index, &name)| QueueItem {
+            name,
+            item_type: queue_types.get(name).copied().unwrap(),
+            is_output: index >= just_inputs,
+        })
+        .collect()
 }
 
 fn main() {

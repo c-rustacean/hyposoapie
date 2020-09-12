@@ -33,6 +33,19 @@ struct Config {
     output: Vec<SourceName>,
 }
 
+#[derive(Debug)]
+struct QueueItem<'cfg> {
+    name: &'cfg str,
+    item_type: QueueItemType,
+    is_output: bool,
+}
+
+#[derive(PartialEq, Copy, Clone, Debug)]
+enum QueueItemType {
+    Source,
+    Filter,
+}
+
 trait Name {
     fn name(&self) -> &str;
 }
@@ -174,19 +187,6 @@ fn parse_config() -> Config {
         filters,
         output,
     }
-}
-
-#[derive(Debug)]
-struct QueueItem<'cfg> {
-    name: &'cfg str,
-    item_type: QueueItemType,
-    is_output: bool,
-}
-
-#[derive(PartialEq, Copy, Clone, Debug)]
-enum QueueItemType {
-    Source,
-    Filter,
 }
 
 fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {

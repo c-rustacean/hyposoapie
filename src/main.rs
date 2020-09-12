@@ -176,12 +176,17 @@ fn parse_config() -> Config {
     }
 }
 
-fn main() {
-    let config = parse_config();
+fn compute_process_queue(config: &Config) -> Vec<&str> {
+    // Create the chain of dependencies/processing from config
 
-    // TODO: Create the chain of dependencies/processing from config
-    // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
-    //       the entire chain is iterating over the trait
+    // TODO: Detect cycles in chains. How?
+    //       Maybe each of the outputs from config should
+    //       be processed independently, so we re-see an
+    //       item. we have a cycle?
+
+    // TODO: Make sure that if filter1 depends on filter2, and both are
+    //       outputs, the order in the processing queue is reflecting the
+    //       dependency (filter2 before filter1)
 
     let mut process_queue = config.output.iter().map(|x| x.name()).collect::<Vec<_>>();
 
@@ -273,14 +278,14 @@ fn main() {
     // later introduced items in the queue should be the resolvable ones
     process_queue.reverse();
 
-    // TODO: Detect cycles in chains. How?
-    //       Maybe each of the outputs from config should
-    //       be processed independently, so we re-see an
-    //       item. we have a cycle?
+    dbg!(process_queue)
+}
 
-    // TODO: Make sure that if filter1 depends on filter2, and both are
-    //       outputs, the order in the processing queue is reflecting the
-    //       dependency (filter2 before filter1)
+fn main() {
+    let config = parse_config();
 
-    dbg!(process_queue);
+    // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
+    //       the entire chain is iterating over the trait
+
+    let _process_queue = compute_process_queue(&config);
 }

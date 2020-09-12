@@ -278,7 +278,9 @@ fn main() {
     //       be processed independently, so we re-see an
     //       item. we have a cycle?
 
-    // TODO: chained filters
+    // TODO: Make sure that if filter1 depends on filter2, and both are
+    //       outputs, the order in the processing queue is reflecting the
+    //       dependency (filter2 before filter1)
 
     dbg!(process_queue);
 }

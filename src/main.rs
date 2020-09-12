@@ -176,7 +176,19 @@ fn parse_config() -> Config {
     }
 }
 
-fn compute_process_queue(config: &Config) -> Vec<&str> {
+#[derive(Debug)]
+struct QueueItem<'cfg> {
+    name: &'cfg str,
+    item_type: QueueItemType,
+}
+
+#[derive(PartialEq, Copy, Clone, Debug)]
+enum QueueItemType {
+    Source,
+    Filter,
+}
+
+fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     // Create the chain of dependencies/processing from config
 
     // TODO: Detect cycles in chains. How?
@@ -187,6 +199,9 @@ fn compute_process_queue(config: &Config) -> Vec<&str> {
     // TODO: Make sure that if filter1 depends on filter2, and both are
     //       outputs, the order in the processing queue is reflecting the
     //       dependency (filter2 before filter1)
+
+    use QueueItemType::*;
+    use std::collections::HashMap;
 
     let mut process_queue = config.output.iter().map(|x| x.name()).collect::<Vec<_>>();
 
@@ -218,6 +233,7 @@ fn compute_process_queue(config: &Config) -> Vec<&str> {
     // dbg!(&feeds_and_filters);
 
     let mut seen: HashSet<&str> = HashSet::new();
+    let mut queue_types: HashMap<&'a str, QueueItemType> = HashMap::new();
     let mut queue_extension: Vec<&str>;
 
     let mut next_index = 0usize;
@@ -241,6 +257,14 @@ fn compute_process_queue(config: &Config) -> Vec<&str> {
                     .filter(|&name| !seen.contains(&name))
                     .collect::<Vec<_>>();
 
+                match queue_types.insert(&item, Filter) {
+                    Some(Source) => panic!(
+                        "Duplicate name found ({}), but of different type",
+                        &item
+                    ),
+                    _ => (),
+                };
+
                 queue_extension.append(&mut unique_filter_inputs);
             } else if feed_names.contains(&item) {
                 let mut unique_feed_inputs = config
@@ -250,6 +274,14 @@ fn compute_process_queue(config: &Config) -> Vec<&str> {
                     .map(|x| x.name())
                     .filter(|&name| !seen.contains(&name))
                     .collect::<Vec<_>>();
+
+                match queue_types.insert(&item, Source) {
+                    Some(Filter) => panic!(
+                        "Duplicate name found ({}), but of different type",
+                        &item
+                    ),
+                    _ => (),
+                };
 
                 queue_extension.append(&mut unique_feed_inputs);
             } else {
@@ -278,7 +310,14 @@ fn compute_process_queue(config: &Config) -> Vec<&str> {
     // later introduced items in the queue should be the resolvable ones
     process_queue.reverse();
 
-    dbg!(process_queue)
+    assert_eq!(process_queue.len(), queue_types.len());
+    dbg!(&process_queue);
+
+    process_queue.iter().map(|&name| QueueItem {
+        name,
+        item_type: queue_types.get(name).copied().unwrap(),
+    })
+    .collect()
 }
 
 fn main() {
@@ -287,5 +326,5 @@ fn main() {
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
-    let _process_queue = compute_process_queue(&config);
+    let _process_queue = dbg!(compute_process_queue(&config));
 }

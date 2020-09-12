@@ -1,4 +1,6 @@
+use feed_rs::{model, parser};
 use std::collections::BTreeMap;
+use std::collections::HashMap;
 use std::fs::File;
 use std::io::prelude::*;
 use toml::Value;
@@ -192,7 +194,6 @@ fn parse_config() -> Config {
 fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     // Create the chain of dependencies/processing from config
 
-    use std::collections::HashMap;
     use std::collections::HashSet;
 
     let mut process_queue = config.output.iter().map(|x| x.name()).collect::<Vec<_>>();
@@ -308,13 +309,65 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
         .collect()
 }
 
+type FeedContent = Vec<model::Entry>;
+type HashMapFeeds<'cfg> = HashMap<&'cfg str, FeedContent>;
+
+fn fetch(url: String) -> Option<String> {
+    None
+}
+
+fn resolve_item<'cfg>(
+    name: &'cfg str,
+    item_type: &QueueItemType,
+    resolved_items: &HashMapFeeds,
+    config: &'cfg Config,
+) -> Option<FeedContent> {
+    if *item_type == QueueItemType::Source {
+        if let Some(rss_xml) = if let Some(url) = dbg!(config
+            .sources
+            .iter()
+            .filter(|&source| source.name() == name)
+            .map(|x| x.url.clone())
+            .next())
+        {
+            fetch(url)
+        } else {
+            return None;
+        } {
+            if let Ok(feed) = parser::parse(rss_xml.as_bytes()) {
+                Some(feed.entries)
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    } else {
+        let inputs = dbg!(config.filters.iter().filter(|x| x.name() == dbg!(name)))
+            .map(|x| &x.input)
+            .next();
+        if let Some(sources) = inputs {
+            let source_names = sources.iter().map(|x| x.name()).collect::<Vec<_>>();
+            if source_names.iter().all(|x| resolved_items.contains_key(x)) {
+                // TODO: filter
+                unimplemented!("merge inputs & filter")
+            } else {
+                // not all inputs are available
+                None
+            }
+        } else {
+            None
+        }
+    }
+}
+
 fn main() {
     let config = parse_config();
 
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
-    let _process_queue = dbg!(compute_process_queue(&config));
+    let process_queue = dbg!(compute_process_queue(&config));
 
     // TODO: Detect cycles in chains. How?
     //       Maybe each of the outputs from config should
@@ -331,4 +384,27 @@ fn main() {
     // 3. count the number of resolved items and compare to the
     //    previous count (initially 0); if they are identical,
     //    then we're stuck - we have a cycle; repeat otherwise
+
+    let mut resolved: HashMapFeeds = HashMap::new();
+    let mut resolved_items = 0usize;
+    let process_queue_len = process_queue.len();
+
+    loop {
+        for item in &process_queue {
+            if let Some(_) = resolved.get(&item.name) {
+                continue;
+            };
+
+            if let Some(vec_entries) = resolve_item(&item.name, &item.item_type, &resolved, &config)
+            {
+                resolved.insert(&item.name, vec_entries);
+            }
+        }
+
+        match resolved.len() {
+            x if x == process_queue_len => break,
+            x if x == resolved_items => panic!("Got stuck when trying to resolve the queue. Most likely, there are cycles in the config."),
+            x => resolved_items = x,
+        };
+    }
 }

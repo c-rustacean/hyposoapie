@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:orfon="http://rss.orf.at/1.0/"
+  xmlns="http://purl.org/rss/1.0/"
+>
+<channel rdf:about="https://orf.at/">
+   <title>news.ORF.at</title>
+   <link>https://orf.at/</link>
+   <dc:date>2020-09-12T23:25:56+02:00</dc:date>
+      <description>Die aktuellsten Nachrichten auf einen Blick - aus Österreich und der ganzen Welt. In Text, Bild und Video.</description>
+   <dc:publisher>ORF Österreichischer Rundfunk, Wien</dc:publisher>
+   <dc:creator>ORF Online und Teletext GmbH &amp; Co KG</dc:creator>
+   <dc:language>de</dc:language>
+   <dc:rights>Copyright &#169; 2020 ORF Online und Teletext GmbH &amp; Co KG</dc:rights>
+   <sy:updatePeriod>hourly</sy:updatePeriod>
+   <sy:updateFrequency>2</sy:updateFrequency>
+   <sy:updateBase>2000-01-01T00:00:00Z</sy:updateBase>
+   <orfon:site>news.ORF.at</orfon:site>
+
+
+
+   <items>
+      <rdf:Seq>
+         <rdf:li rdf:resource="https://orf.at/stories/3181139/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181138/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181137/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181136/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181135/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181134/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181133/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181132/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181131/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181129/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181130/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181128/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181120/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181127/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181126/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181125/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181124/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181123/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181122/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181121/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181105/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181119/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181118/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181117/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181110/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181116/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181115/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181114/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181113/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181112/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181111/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181086/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181109/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181108/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181107/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181106/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181104/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181103/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181102/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181101/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181100/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181099/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181098/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181097/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181096/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181095/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181090/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181091/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181089/" />
+
+   <rdf:li rdf:resource="https://orf.at/stories/3181088/" />
+
+
+      </rdf:Seq>
+   </items>
+</channel>
+<item rdf:about="https://orf.at/stories/3181139/">
+   <title>Bericht: Direktflüge zwischen Israel und Marokko geplant</title>
+
+   <link>https://orf.at/stories/3181139/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T23:25:56+02:00</dc:date>
+
+   <orfon:usid>news:3181139</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181138/">
+   <title>Maskenfreies Event-Vergnügen nur noch am fixen Platz</title>
+
+   <link>https://orf.at/stories/3181138/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T23:19:41+02:00</dc:date>
+
+   <orfon:usid>news:3181138</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181137/">
+   <title>Derzeit 5.363 aktive Fälle</title>
+
+   <link>https://orf.at/stories/3181137/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T23:13:34+02:00</dc:date>
+
+   <orfon:usid>news:3181137</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181136/">
+   <title>Vorarlberg wählt Gemeindevertretungen und Bürgermeister</title>
+
+   <link>https://orf.at/stories/3181136/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T23:06:23+02:00</dc:date>
+
+   <orfon:usid>news:3181136</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181135/">
+   <title>Internationales Brucknerfest startet in Linz</title>
+
+   <link>https://orf.at/stories/3181135/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T23:04:13+02:00</dc:date>
+
+   <orfon:usid>news:3181135</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/KulturUeberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181134/">
+   <title>Regionalwahlen in Russland</title>
+
+   <link>https://orf.at/stories/3181134/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T23:03:11+02:00</dc:date>
+
+   <orfon:usid>news:3181134</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181133/">
+   <title>E-Bike-Fahrer bei Unfall mit Motorrad getötet</title>
+
+   <link>https://orf.at/stories/3181133/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T22:58:53+02:00</dc:date>
+
+   <orfon:usid>news:3181133</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181132/">
+   <title>37 Fälle in Grazer Pflegeheim</title>
+
+   <link>https://orf.at/stories/3181132/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T22:57:36+02:00</dc:date>
+
+   <orfon:usid>news:3181132</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181131/">
+   <title>Erste Burg-Premiere: Mit Calderon bis nach Moria</title>
+
+   <link>https://orf.at/stories/3181131/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T22:53:12+02:00</dc:date>
+
+   <orfon:usid>news:3181131</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/Buehne" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181129/">
+   <title>Polizei geht gewaltsam gegen Frauen vor</title>
+   <description>Mit exzessiver Gewalt sind maskierte Uniformierte in Minsk gegen friedlich demonstrierende Kritikerinnen des autoritären weißrussischen Staatschefs Alexander Lukaschenko vorgegangen. Bei den Protesten am Samstag, an denen sich Tausende Frauen beteiligten, gab es nach Angaben des Menschenrechtsorganisation Viasna mehr als 45 Festnahmen. Auch in anderen Städten gab es Demonstrationen.</description>
+   <link>https://orf.at/stories/3181129/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T22:48:36+02:00</dc:date>
+
+   <orfon:usid>news:3181129</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181130/">
+   <title>Bundesliga: Hartberg startet mit Remis in Altach</title>
+
+   <link>https://orf.at/stories/3181130/</link>
+   <dc:subject>Sport</dc:subject>
+   <dc:date>2020-09-12T22:37:08+02:00</dc:date>
+
+   <orfon:usid>news:3181130</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Sport/Sportueberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181128/">
+   <title>Goldener Löwe für US-Drama „Nomadland“</title>
+   <description>Der Goldene Löwe des Filmfestivals Venedig ist an das US-Drama „Nomadland“ der in China geborenen Regisseurin Chloe Zhao gegangen. Das gab die Jury am Samstagabend bekannt. Das Werk mit Frances McDormand in der Hauptrolle erzählt von einer Frau, die nach dem wirtschaftlichen Kollaps einer kleinen Stadt ihre Sachen packt und als moderne Nomadin lebt.</description>
+   <link>https://orf.at/stories/3181128/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T21:51:16+02:00</dc:date>
+
+   <orfon:usid>news:3181128</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/FilmUndKino" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181120/">
+   <title>„Soforthilfe“ vor Ort, keine Aufnahmen</title>
+   <description>Vier Tage nach dem Großbrand, der das Flüchtlingslager Moria auf Lesbos zerstörte, bleibt die Situation auf der Insel angespannt. Laut dem öffentlich-rechtlichen griechischen Radio bezogen am Samstag die ersten Geflüchteten ein provisorisches Zeltlager – unter Protest, auch von Anrainern. Doch Tausende sind weiterhin obdachlos. Die Bundesregierung startete unterdessen eine „Soforthilfe“. Uneins ist die Regierung weiter zur Aufnahme von Geflüchteten.</description>
+   <link>https://orf.at/stories/3181120/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T21:01:34+02:00</dc:date>
+
+   <orfon:usid>news:3181120</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181127/">
+   <title>Neue Verordnung: Maske bei Indoor-Sportveranstaltungen</title>
+
+   <link>https://orf.at/stories/3181127/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T20:55:12+02:00</dc:date>
+
+   <orfon:usid>news:3181127</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181126/">
+   <title>Später Elfer bewahrt Liverpool vor Fehlstart</title>
+
+   <link>https://orf.at/stories/3181126/</link>
+   <dc:subject>Sport</dc:subject>
+   <dc:date>2020-09-12T20:51:25+02:00</dc:date>
+
+   <orfon:usid>news:3181126</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Sport/Sportueberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181125/">
+   <title>Trump reist am Montag ins kalifornische Waldbrandgebiet</title>
+
+   <link>https://orf.at/stories/3181125/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T20:48:26+02:00</dc:date>
+
+   <orfon:usid>news:3181125</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181124/">
+   <title>Sandsturm über Ankara – Mindestens sechs Verletzte</title>
+
+   <link>https://orf.at/stories/3181124/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T20:41:00+02:00</dc:date>
+
+   <orfon:usid>news:3181124</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181123/">
+   <title>Polizeichef rügte Vergewaltigungsopfer: Demos in Pakistan</title>
+
+   <link>https://orf.at/stories/3181123/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T20:37:38+02:00</dc:date>
+
+   <orfon:usid>news:3181123</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181122/">
+   <title>Gasstreit: Athen verkündet Aufrüstung</title>
+
+   <link>https://orf.at/stories/3181122/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T20:35:19+02:00</dc:date>
+
+   <orfon:usid>news:3181122</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181121/">
+   <title>Venedig: Goldener Löwe für US-Drama „Nomadland“</title>
+
+   <link>https://orf.at/stories/3181121/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T20:27:35+02:00</dc:date>
+
+   <orfon:usid>news:3181121</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/FilmUndKino" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181105/">
+   <title>Tränengas gegen Flüchtlinge auf Lesbos</title>
+   <description>Die Lage im völlig abgebrannten Lager Moria auf der griechischen Insel Lesbos verschärft sich empfindlich. Tausende haben weiterhin kein Dach über dem Kopf, die Organisation Ärzte ohne Grenzen sieht die Lage „eskalieren“. Während die österreichische Bundesregierung auf Hilfe vor Ort setzt und ein „Soforthilfepaket“ ankündigte, kommt es auf Lesbos bei Protesten gegen die unmenschlichen Bedingungen zu Zusammenstößen mit der Polizei.</description>
+   <link>https://orf.at/stories/3181105/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T19:21:24+02:00</dc:date>
+
+   <orfon:usid>news:3181105</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181119/">
+   <title>Hamilton fährt auch in Mugello auf Poleposition</title>
+
+   <link>https://orf.at/stories/3181119/</link>
+   <dc:subject>Sport</dc:subject>
+   <dc:date>2020-09-12T19:18:06+02:00</dc:date>
+
+   <orfon:usid>news:3181119</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Sport/Sportueberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181118/">
+   <title>Zahl der Neuinfizierten in Italien gesunken</title>
+
+   <link>https://orf.at/stories/3181118/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T19:00:03+02:00</dc:date>
+
+   <orfon:usid>news:3181118</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181117/">
+   <title>Tod eines 21-Jährigen erschüttert Italien</title>
+
+   <link>https://orf.at/stories/3181117/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T18:53:58+02:00</dc:date>
+
+   <orfon:usid>news:3181117</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181110/">
+   <title>Moskitos töten nach Hurrikan in USA Hunderte Rinder</title>
+
+   <link>https://orf.at/stories/3181110/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T17:57:34+02:00</dc:date>
+
+   <orfon:usid>news:3181110</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181116/">
+   <title>Buckelwale verirrten sich in australischen Fluss</title>
+
+   <link>https://orf.at/stories/3181116/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T17:57:01+02:00</dc:date>
+
+   <orfon:usid>news:3181116</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181115/">
+   <title>Gewalt gegen Frauen bei Demos in Minsk</title>
+
+   <link>https://orf.at/stories/3181115/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T17:51:02+02:00</dc:date>
+
+   <orfon:usid>news:3181115</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181114/">
+   <title>Rechnungshof-Kritik an Waldhäusl wegen  Flüchtlingsheims</title>
+
+   <link>https://orf.at/stories/3181114/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T17:37:11+02:00</dc:date>
+
+   <orfon:usid>news:3181114</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181113/">
+   <title>Schweinepest: Bangen nach Fall in Deutschland</title>
+
+   <link>https://orf.at/stories/3181113/</link>
+   <dc:subject>Wirtschaft</dc:subject>
+   <dc:date>2020-09-12T17:34:13+02:00</dc:date>
+
+   <orfon:usid>news:3181113</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Wirtschaft/Wirtschaftspolitik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181112/">
+   <title>Thiem nach Finaleinzug bei US Open erleichtert</title>
+
+   <link>https://orf.at/stories/3181112/</link>
+   <dc:subject>Sport</dc:subject>
+   <dc:date>2020-09-12T17:33:43+02:00</dc:date>
+
+   <orfon:usid>news:3181112</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Sport/Sportueberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181111/">
+   <title>Großer Schusswaffenfund in rechter Szene in Deutschland</title>
+
+   <link>https://orf.at/stories/3181111/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T17:33:33+02:00</dc:date>
+
+   <orfon:usid>news:3181111</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181086/">
+   <title>Johnson kämpft mit internen Kritikern</title>
+   <description>Der britische Premier Boris Johnson ist in den Verhandlungen zu einem geordneten Brexit auf Konfrontationskurs mit der EU gegangen. Sein Versuch, den gültigen Brexit-Deal wieder aufzumachen, sorgte in der EU für Empörung. Doch der Regierungschef sieht sich auch zunehmend  mit Kritik aus den eigenen Reihen konfrontiert. Mit einem eindringlichen Appell versucht Johnson nun die internen Kritiker zu überzeugen.</description>
+   <link>https://orf.at/stories/3181086/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T17:33:18+02:00</dc:date>
+
+   <orfon:usid>news:3181086</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181109/">
+   <title>LASK und Austria orten Steigerungspotenzial</title>
+
+   <link>https://orf.at/stories/3181109/</link>
+   <dc:subject>Sport</dc:subject>
+   <dc:date>2020-09-12T17:02:05+02:00</dc:date>
+
+   <orfon:usid>news:3181109</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Sport/Sportueberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181108/">
+   <title>George Takeis Kindheit im Internierungslager</title>
+
+   <link>https://orf.at/stories/3181108/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T16:51:28+02:00</dc:date>
+
+   <orfon:usid>news:3181108</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/Literatur" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181107/">
+   <title>Bisher 1.331.493 Tests durchgeführt</title>
+
+   <link>https://orf.at/stories/3181107/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T16:49:48+02:00</dc:date>
+
+   <orfon:usid>news:3181107</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181106/">
+   <title>299 Raser in einer Nacht in und um Wels erwischt</title>
+
+   <link>https://orf.at/stories/3181106/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T16:43:30+02:00</dc:date>
+
+   <orfon:usid>news:3181106</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181104/">
+   <title>AstraZeneca setzt Impfstofftests in Großbritannien fort</title>
+
+   <link>https://orf.at/stories/3181104/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T16:40:47+02:00</dc:date>
+
+   <orfon:usid>news:3181104</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181103/">
+   <title>Konflikt zwischen Zypern und Türkei spitzt sich weiter zu</title>
+
+   <link>https://orf.at/stories/3181103/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T15:55:55+02:00</dc:date>
+
+   <orfon:usid>news:3181103</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181102/">
+   <title>Bestürzung nach Hinrichtung von iranischem Ringer Afkari</title>
+
+   <link>https://orf.at/stories/3181102/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T15:53:46+02:00</dc:date>
+
+   <orfon:usid>news:3181102</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181101/">
+   <title>EU-Kommission will Kryptowährungen nicht verbieten</title>
+
+   <link>https://orf.at/stories/3181101/</link>
+   <dc:subject>Wirtschaft</dc:subject>
+   <dc:date>2020-09-12T15:51:15+02:00</dc:date>
+
+   <orfon:usid>news:3181101</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Wirtschaft/Wirtschaftspolitik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181100/">
+   <title>Britischer Designer Terence Conran gestorben</title>
+
+   <link>https://orf.at/stories/3181100/</link>
+   <dc:subject>Kultur</dc:subject>
+   <dc:date>2020-09-12T15:43:26+02:00</dc:date>
+
+   <orfon:usid>news:3181100</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:KulturUndFreizeit/KulturUeberblick" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181099/">
+   <title>250 Festnahmen bei „Gelbwesten“-Protest in Paris</title>
+
+   <link>https://orf.at/stories/3181099/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T15:42:30+02:00</dc:date>
+
+   <orfon:usid>news:3181099</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181098/">
+   <title>Betrunkener täuschte Autodiebstahl vor</title>
+
+   <link>https://orf.at/stories/3181098/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T15:36:47+02:00</dc:date>
+
+   <orfon:usid>news:3181098</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181097/">
+   <title>Polizei nimmt Demonstranten in Minsk fest</title>
+
+   <link>https://orf.at/stories/3181097/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T15:28:17+02:00</dc:date>
+
+   <orfon:usid>news:3181097</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181096/">
+   <title>Vorwürfe gegen Wiener Pensionistenwohnhäuser</title>
+
+   <link>https://orf.at/stories/3181096/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T15:13:13+02:00</dc:date>
+
+   <orfon:usid>news:3181096</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181095/">
+   <title>US-Bikertreffen zog 260.000 Infektionen nach sich</title>
+
+   <link>https://orf.at/stories/3181095/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T14:57:09+02:00</dc:date>
+
+   <orfon:usid>news:3181095</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181090/">
+   <title>Ampelkommission tagt bereits am Montag</title>
+   <description>Üblicherweise tagt die Kommission zur Coronavirus-Ampel donnerstags. Doch bereits am Montag wird das Gremium zu einer weiteren Sitzung zusammentreffen. Grund sind die stark ansteigenden Infektionszahlen sowie die Evaluierung der Ampelregionen, so Kommissionsleiter Ulrich Herzog heute im Ö1-„Mittagsjournal“. Laut Gesundheitsminister Rudolf Anschober (Grüne) sind die derzeitigen Zahlen „deutlich zu hoch“.</description>
+   <link>https://orf.at/stories/3181090/</link>
+   <dc:subject>Inland</dc:subject>
+   <dc:date>2020-09-12T14:55:30+02:00</dc:date>
+
+   <orfon:usid>news:3181090</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikInland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:story" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181091/">
+   <title>Buckelwale verirrten sich in Fluss im Norden Australiens</title>
+
+   <link>https://orf.at/stories/3181091/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T14:20:54+02:00</dc:date>
+
+   <orfon:usid>news:3181091</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181089/">
+   <title>NÖ: Abgängiges Kind schlafend in Bachbett gefunden</title>
+
+   <link>https://orf.at/stories/3181089/</link>
+   <dc:subject>Chronik</dc:subject>
+   <dc:date>2020-09-12T14:15:04+02:00</dc:date>
+
+   <orfon:usid>news:3181089</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Nachrichten/Chronik" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+<item rdf:about="https://orf.at/stories/3181088/">
+   <title>Afghanische Friedensgespräche: Lange Verhandlungen erwartet</title>
+
+   <link>https://orf.at/stories/3181088/</link>
+   <dc:subject>Ausland</dc:subject>
+   <dc:date>2020-09-12T14:08:25+02:00</dc:date>
+
+   <orfon:usid>news:3181088</orfon:usid>
+   <orfon:oewaCategory rdf:resource="urn:oewa:RedCont:Politik/PolitikAusland" />
+   <orfon:storyType rdf:resource="urn:orfon:type:ticker" />
+</item>
+
+
+</rdf:RDF>
+
+

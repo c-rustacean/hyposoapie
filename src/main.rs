@@ -313,7 +313,26 @@ type FeedContent = Vec<model::Entry>;
 type HashMapFeeds<'cfg> = HashMap<&'cfg str, FeedContent>;
 
 fn fetch(url: String) -> Option<String> {
-    None
+
+    if url == "https://rss.orf.at/news.xml" {
+        dbg!("Canned orf_at");
+        return Some(String::from(include_str!("orf_at.xml")));
+    };
+
+    if url == "https://feeds.feedburner.com/hotnews/yvoq" {
+        dbg!("Canned hotnews");
+        return Some(String::from(include_str!("hotnews.xml")));
+    }
+
+    if let Ok(res) = reqwest::blocking::get(&url) {
+        println!("Status: {}", res.status());
+        println!("Headers:\n{:?}", res.headers());
+
+        // res.headers().get("charset") and use text_with_charset
+        dbg!(res.text()).ok()
+    } else {
+        None
+    }
 }
 
 fn resolve_item<'cfg>(

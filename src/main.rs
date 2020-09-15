@@ -312,8 +312,27 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
 type FeedContent = Vec<model::Entry>;
 type HashMapFeeds<'cfg> = HashMap<&'cfg str, FeedContent>;
 
-fn fetch(url: String) -> Option<String> {
+pub trait Resolve {
+    fn resolve(&self, _resolved_items: &HashMapFeeds) -> Option<FeedContent> {
+        None
+    }
+}
 
+impl Resolve for RssSource {
+    fn resolve(&self, _: &HashMapFeeds) -> Option<FeedContent> {
+        if let Some(rss_xml) = fetch(self.url.clone()) {
+            if let Ok(feed) = parser::parse(rss_xml.as_bytes()) {
+                Some(dbg!(feed.entries))
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    }
+}
+
+fn fetch(url: String) -> Option<String> {
     if url == "https://rss.orf.at/news.xml" {
         dbg!("Canned orf_at");
         return Some(String::from(include_str!("orf_at.xml")));
@@ -342,25 +361,14 @@ fn resolve_item<'cfg>(
     config: &'cfg Config,
 ) -> Option<FeedContent> {
     if *item_type == QueueItemType::Source {
-        if let Some(rss_xml) = if let Some(url) = dbg!(config
+        dbg!(config
             .sources
             .iter()
             .filter(|&source| source.name() == name)
-            .map(|x| x.url.clone())
-            .next())
-        {
-            fetch(url)
-        } else {
-            return None;
-        } {
-            if let Ok(feed) = parser::parse(rss_xml.as_bytes()) {
-                Some(feed.entries)
-            } else {
-                None
-            }
-        } else {
-            None
-        }
+            .next()
+            .unwrap()
+            .resolve(&resolved_items)
+        )
     } else {
         let inputs = dbg!(config.filters.iter().filter(|x| x.name() == dbg!(name)))
             .map(|x| &x.input)

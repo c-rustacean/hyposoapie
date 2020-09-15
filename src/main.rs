@@ -322,7 +322,7 @@ impl Resolve for RssSource {
     fn resolve(&self, _: &HashMapFeeds) -> Option<FeedContent> {
         if let Some(rss_xml) = fetch(self.url.clone()) {
             if let Ok(feed) = parser::parse(rss_xml.as_bytes()) {
-                Some(dbg!(feed.entries))
+                Some(feed.entries)
             } else {
                 None
             }
@@ -340,6 +340,14 @@ impl Resolve for RssFilter {
             .map(|x| x.name())
             .all(|x| resolved_items.contains_key(x))
         {
+            //TODO: merge these?
+            // Some((inputs
+            //     .iter()
+            //     .map(|x| resolved_items.get(x.name()).unwrap().clone())
+            //     .next()
+            //     .unwrap()))
+
+
             // TODO: filter
             // unimplemented!("merge inputs & filter");
             Some(Vec::new())

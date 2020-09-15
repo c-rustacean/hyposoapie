@@ -332,6 +332,24 @@ impl Resolve for RssSource {
     }
 }
 
+impl Resolve for RssFilter {
+    fn resolve(&self, resolved_items: &HashMapFeeds) -> Option<FeedContent> {
+        let inputs = &self.input;
+        if inputs
+            .iter()
+            .map(|x| x.name())
+            .all(|x| resolved_items.contains_key(x))
+        {
+            // TODO: filter
+            // unimplemented!("merge inputs & filter");
+            Some(Vec::new())
+        } else {
+            // not all inputs are available
+            None
+        }
+    }
+}
+
 fn fetch(url: String) -> Option<String> {
     if url == "https://rss.orf.at/news.xml" {
         dbg!("Canned orf_at");
@@ -361,30 +379,23 @@ fn resolve_item<'cfg>(
     config: &'cfg Config,
 ) -> Option<FeedContent> {
     if *item_type == QueueItemType::Source {
-        dbg!(config
+        // dbg!(
+        config
             .sources
             .iter()
             .filter(|&source| source.name() == name)
             .next()
             .unwrap()
             .resolve(&resolved_items)
-        )
+    // )
     } else {
-        let inputs = dbg!(config.filters.iter().filter(|x| x.name() == dbg!(name)))
-            .map(|x| &x.input)
-            .next();
-        if let Some(sources) = inputs {
-            let source_names = sources.iter().map(|x| x.name()).collect::<Vec<_>>();
-            if source_names.iter().all(|x| resolved_items.contains_key(x)) {
-                // TODO: filter
-                unimplemented!("merge inputs & filter")
-            } else {
-                // not all inputs are available
-                None
-            }
-        } else {
-            None
-        }
+        dbg!(dbg!(config
+            .filters
+            .iter()
+            .filter(|&filter| filter.name() == name)
+            .next()
+            .unwrap())
+            .resolve(&resolved_items))
     }
 }
 

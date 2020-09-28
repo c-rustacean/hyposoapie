@@ -14,6 +14,7 @@ struct SourceName {
 struct RssSource {
     name: SourceName,
     url: String,
+    entries: Option<Vec<model::Entry>>
 }
 
 #[derive(Debug)]
@@ -91,6 +92,7 @@ fn get_sources(toml: &BTreeMap<String, Value>) -> Vec<RssSource> {
             .map(|(name, v)| RssSource {
                 name: SourceName { name: name.clone() },
                 url: v.to_string().replace("\"", ""),
+                entries: None,
             })
             .collect(),
         _ => panic!("No sources found in config"),

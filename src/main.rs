@@ -14,7 +14,7 @@ struct SourceName {
 struct RssSource {
     name: SourceName,
     url: String,
-    entries: Option<Vec<model::Entry>>
+    entries: Option<Vec<model::Entry>>,
 }
 
 #[derive(Debug)]
@@ -334,6 +334,22 @@ impl Resolve for RssSource {
     }
 }
 
+fn entry_contains(entry: &model::Entry, text: &str) -> bool {
+    let mut res = false;
+
+    if let Some(ref content) = &entry.content {
+        if let Some(ref body) = &content.body {
+            res = body.contains(text);
+        };
+    };
+
+    if let Some(ref summary) = &entry.summary {
+        res |= summary.content.contains(text);
+    };
+
+    dbg!(res)
+}
+
 impl Resolve for RssFilter {
     fn resolve(&self, resolved_items: &HashMapFeeds) -> Option<FeedContent> {
         let inputs = &self.input;
@@ -342,17 +358,23 @@ impl Resolve for RssFilter {
             .map(|x| x.name())
             .all(|x| resolved_items.contains_key(x))
         {
-            //TODO: merge these?
-            // Some((inputs
-            //     .iter()
-            //     .map(|x| resolved_items.get(x.name()).unwrap().clone())
-            //     .next()
-            //     .unwrap()))
-
-
-            // TODO: filter
-            // unimplemented!("merge inputs & filter");
-            Some(Vec::new())
+            // TODO: merge these?
+            Some(
+                inputs
+                    .iter()
+                    .map(|x| resolved_items.get(x.name()).unwrap().clone())
+                    .map(|x| {
+                        x.iter()
+                            .filter(|&x| match self.filter {
+                                FilterType::Contains(ref text) => entry_contains(&x, &text),
+                            })
+                            .map(|x| x.clone())
+                            .collect::<Vec<_>>()
+                    })
+                    .flatten()
+                    .map(|x| x.to_owned())
+                    .collect(),
+            )
         } else {
             // not all inputs are available
             None
@@ -405,7 +427,7 @@ fn resolve_item<'cfg>(
             .filter(|&filter| filter.name() == name)
             .next()
             .unwrap())
-            .resolve(&resolved_items))
+        .resolve(&resolved_items))
     }
 }
 

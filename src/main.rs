@@ -477,4 +477,15 @@ fn main() {
             x => resolved_items = x,
         };
     }
+
+    // TODO: print only once each entry
+    println!("\n\nOUTPUT:\n\n");
+    for output in &config.output {
+        if let Some(entries_vec) = resolved.get(output.name()) {
+            println!("     {} results from {}:", entries_vec.len(), output.name());
+            for entry in entries_vec {
+                // println!(" --\n\n{:#?}\n\n --", entry);
+            }
+        }
+    }
 }

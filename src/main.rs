@@ -296,7 +296,7 @@ fn compute_process_queue<'a>(config: &'a Config) -> Vec<QueueItem<'a>> {
     process_queue.reverse();
 
     assert_eq!(process_queue.len(), queue_types.len());
-    dbg!(&process_queue);
+    // dbg!(&process_queue);
 
     let just_inputs = process_queue.len() - outputs;
 
@@ -347,7 +347,7 @@ fn entry_contains(entry: &model::Entry, text: &str) -> bool {
         res |= summary.content.contains(text);
     };
 
-    dbg!(res)
+    res
 }
 
 impl Resolve for RssFilter {
@@ -384,11 +384,13 @@ impl Resolve for RssFilter {
 
 fn fetch(url: String) -> Option<String> {
     if url == "https://rss.orf.at/news.xml" {
+        #[cfg(debug_assertions)]
         dbg!("Canned orf_at");
         return Some(String::from(include_str!("orf_at.xml")));
     };
 
     if url == "https://feeds.feedburner.com/hotnews/yvoq" {
+        #[cfg(debug_assertions)]
         dbg!("Canned hotnews");
         return Some(String::from(include_str!("hotnews.xml")));
     }
@@ -421,13 +423,13 @@ fn resolve_item<'cfg>(
             .resolve(&resolved_items)
     // )
     } else {
-        dbg!(dbg!(config
+        config
             .filters
             .iter()
             .filter(|&filter| filter.name() == name)
             .next()
-            .unwrap())
-        .resolve(&resolved_items))
+            .unwrap()
+            .resolve(&resolved_items)
     }
 }
 
@@ -437,7 +439,7 @@ fn main() {
     // Idea: implement a trait for RSS feed type RssSource, RssFilter and output(?) so processing
     //       the entire chain is iterating over the trait
 
-    let process_queue = dbg!(compute_process_queue(&config));
+    let process_queue = compute_process_queue(&config);
 
     // TODO: Detect cycles in chains. How?
     //       Maybe each of the outputs from config should
@@ -484,7 +486,9 @@ fn main() {
         if let Some(entries_vec) = resolved.get(output.name()) {
             println!("     {} results from {}:", entries_vec.len(), output.name());
             for entry in entries_vec {
-                // println!(" --\n\n{:#?}\n\n --", entry);
+                // TODO: use markdown to output - markdown-gen, maybe?
+                #[cfg(debug_assertions)]
+                println!(" --\n\n{:#?}\n\n --", entry);
             }
         }
     }

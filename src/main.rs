@@ -1,4 +1,5 @@
 use feed_rs::{model, parser};
+use markdown_gen::markdown::*;
 use std::collections::BTreeMap;
 use std::collections::HashMap;
 use std::fs::File;
@@ -433,6 +434,23 @@ fn resolve_item<'cfg>(
     }
 }
 
+fn to_md(md: &mut Markdown<File>, e: &feed_rs::model::Entry) {
+    // let id = e.id;
+    // TODO: list all links
+    let link = e.links[0].href.as_str();
+    // TODO: remove unwrap
+    let title = e.title.as_ref().unwrap().content.as_str();
+    // TODO: remove unwrap
+    let summary = e.summary.as_ref().unwrap().content.as_str();
+
+    md.write("".paragraph()).unwrap();
+    md.write(title.heading(2)).unwrap();
+    md.write("".paragraph()).unwrap();
+    md.write("Go to story".bold().link_to(link)).unwrap();
+    md.write("".paragraph()).unwrap();
+    md.write(summary).unwrap();
+}
+
 fn main() {
     let config = parse_config();
 
@@ -482,6 +500,11 @@ fn main() {
 
     // TODO: print only once each entry
     println!("\n\nOUTPUT:\n\n");
+    // file to dump to the results
+    let file = File::create("index.md").unwrap();
+    let mut md = Markdown::new(file);
+    md.write("Hyposoapie output".heading(1)).unwrap();
+
     for output in &config.output {
         if let Some(entries_vec) = resolved.get(output.name()) {
             println!("     {} results from {}:", entries_vec.len(), output.name());
@@ -489,6 +512,8 @@ fn main() {
                 // TODO: use markdown to output - markdown-gen, maybe?
                 #[cfg(debug_assertions)]
                 println!(" --\n\n{:#?}\n\n --", entry);
+
+                to_md(&mut md, &entry);
             }
         }
     }

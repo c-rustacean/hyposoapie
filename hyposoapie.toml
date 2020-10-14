@@ -6,12 +6,8 @@ orf_at = "https://rss.orf.at/news.xml"
 in = [ "hotnews", "orf_at" ]
 contains = "USR"
 
-[filter.barna]
-in = [ "usr" ]
-contains = "Barna"
-
 [output]
-combine = ["barna"]
+combine = ["usr"]
 
 # expected:
 # ["barna"]
